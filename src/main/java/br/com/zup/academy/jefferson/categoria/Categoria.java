@@ -1,45 +1,32 @@
-package br.com.zup.academy.jefferson.autor;
-
-import java.time.Instant;
+package br.com.zup.academy.jefferson.categoria;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_autor")
-public class Autor {
+@Table(name = "tb_categoria")
+public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable = false)
+	@Column(unique = true, nullable = false)
 	private String nome;
-	@Column(nullable = false)
-	private String email;
-	@Column(nullable = false)
-	private String descricao;
 
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant createdAt;
-	
 	@Deprecated
-	public Autor() {
+	public Categoria() {
 	}
 
-	public Autor(String nome, String email, String descricao) {
+	public Categoria(String nome) {
 		this.nome = nome;
-		this.email = email;
-		this.descricao = descricao;
 	}
 
-	@PrePersist
-	public void prePersist() {
-		createdAt = Instant.now();
+	public String getNome() {
+		return nome;
 	}
 
 	@Override
@@ -58,25 +45,13 @@ public class Autor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Autor other = (Autor) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getDescricao() {
-		return descricao;
 	}
 
 }

@@ -19,6 +19,7 @@ public class AutorDTO {
 
 	private Instant instante = Instant.now();
 
+	@Deprecated
 	public AutorDTO() {
 	}
 
