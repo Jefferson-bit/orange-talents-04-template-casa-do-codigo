@@ -6,12 +6,15 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import br.com.zup.academy.jefferson.validator.UniqueValue;
+
 public class AutorDTO {
 
 	@NotBlank(message = "Campo nome é obrigatório")
 	private String nome;
 	@Email(message = "Email invalido")
 	@NotBlank(message = "Campo e-mail é obrigatório")
+	@UniqueValue(domainClass = Autor.class, fieldName = "email")
 	private String email;
 	@NotBlank(message = "Campo descrição é obrigatório")
 	@Size(max = 400, message = "A descrição máxima é 400 caracteres")
