@@ -1,14 +1,19 @@
 package br.com.zup.academy.jefferson.autor;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import br.com.zup.academy.jefferson.livro.Livro;
 
 @Entity
 @Table(name = "tb_autor")
@@ -26,7 +31,10 @@ public class Autor {
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
-	
+
+	@OneToMany(mappedBy = "autor")
+	private List<Livro> livros = new ArrayList<>();
+
 	@Deprecated
 	public Autor() {
 	}
@@ -65,18 +73,6 @@ public class Autor {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getDescricao() {
-		return descricao;
 	}
 
 }

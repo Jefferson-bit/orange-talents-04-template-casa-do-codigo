@@ -18,10 +18,6 @@ public class CategoriaDTO {
 		this.nome = nome;
 	}
 	
-	public CategoriaDTO(Categoria obj) {
-		this.nome = obj.getNome();
-	}
-	
 	public String getNome() {
 		return nome;
 	}

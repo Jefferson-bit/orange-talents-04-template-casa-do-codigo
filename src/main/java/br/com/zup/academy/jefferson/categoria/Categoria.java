@@ -1,11 +1,17 @@
 package br.com.zup.academy.jefferson.categoria;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.com.zup.academy.jefferson.livro.Livro;
 
 @Entity
 @Table(name = "tb_categoria")
@@ -17,16 +23,15 @@ public class Categoria {
 	@Column(unique = true, nullable = false)
 	private String nome;
 
+	@OneToMany(mappedBy = "categoria")
+	private List<Livro> livros = new ArrayList<>();
+
 	@Deprecated
 	public Categoria() {
 	}
 
 	public Categoria(String nome) {
 		this.nome = nome;
-	}
-
-	public String getNome() {
-		return nome;
 	}
 
 	@Override

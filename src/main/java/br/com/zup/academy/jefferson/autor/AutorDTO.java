@@ -33,12 +33,6 @@ public class AutorDTO {
 		this.email = email;
 		this.descricao = descricao;
 	}
-	
-	public AutorDTO(Autor autor) {
-		this.nome = autor.getNome();
-		this.email = autor.getEmail();
-		this.descricao = autor.getDescricao();
-	}
 
 	public String getDescricao() {
 		return descricao;
