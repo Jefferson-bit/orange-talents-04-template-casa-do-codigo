@@ -45,6 +45,18 @@ public class Autor {
 		this.descricao = descricao;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
 	@PrePersist
 	public void prePersist() {
 		createdAt = Instant.now();

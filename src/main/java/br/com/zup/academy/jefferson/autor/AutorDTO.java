@@ -33,7 +33,7 @@ public class AutorDTO {
 		this.email = email;
 		this.descricao = descricao;
 	}
-
+	
 	public String getDescricao() {
 		return descricao;
 	}
