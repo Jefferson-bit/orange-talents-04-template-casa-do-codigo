@@ -48,7 +48,7 @@ public class Livro {
 	@Deprecated
 	public Livro() {
 	}
-	
+
 	public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroDePaginas, String isbn,
 			LocalDate dataPublicacao, Categoria categoria, Autor autor) {
 		this.titulo = titulo;
@@ -61,14 +61,47 @@ public class Livro {
 		this.categoria = categoria;
 		this.autor = autor;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public String getTitulo() {
 		return titulo;
 	}
-	
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public LocalDate getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public Integer getNumeroDePaginas() {
+		return numeroDePaginas;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public String getResumo() {
+		return resumo;
+	}
+
+	public String getSumario() {
+		return sumario;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
