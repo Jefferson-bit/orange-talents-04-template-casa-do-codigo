@@ -3,6 +3,7 @@ package br.com.zup.academy.jefferson.livro;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -16,7 +17,8 @@ import br.com.zup.academy.jefferson.categoria.Categoria;
 import br.com.zup.academy.jefferson.validator.UniqueValue;
 
 public class LivroDTO {
-
+	
+	
 	@NotBlank(message = "Titulo é obrigatório")
 	@UniqueValue(domainClass = Livro.class, fieldName = "titulo")
 	private String titulo;
@@ -34,6 +36,8 @@ public class LivroDTO {
 	@NotNull(message = "ISBN é obrigatório")
 	@UniqueValue(domainClass = Livro.class, fieldName = "isbn")
 	private String isbn;
+	@NotNull
+	@Future
 	@JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
 	private LocalDate dataPublicacao;
 	@NotNull
@@ -60,13 +64,28 @@ public class LivroDTO {
 		this.categoriaId = categoriaId;
 		this.autorId = autorId;
 	}
-
 	public Livro toModel(Categoria categoria, Autor autor) {
 		return new Livro(titulo, resumo, sumario, preco, numeroDePaginas, isbn, dataPublicacao, categoria, autor);
 	}
 
 	public String getTitulo() {
 		return titulo;
+	}
+
+	public LocalDate getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public Integer getNumeroDePaginas() {
+		return numeroDePaginas;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
 	}
 
 	public String getResumo() {
@@ -77,22 +96,6 @@ public class LivroDTO {
 		return sumario;
 	}
 
-	public BigDecimal getPreco() {
-		return preco;
-	}
-
-	public Integer getNumeroDePaginas() {
-		return numeroDePaginas;
-	}
-
-	public String getIsbn() {
-		return isbn;
-	}
-
-	public LocalDate getDataPublicacao() {
-		return dataPublicacao;
-	}
-
 	public Long getCategoriaId() {
 		return categoriaId;
 	}
@@ -100,5 +103,4 @@ public class LivroDTO {
 	public Long getAutorId() {
 		return autorId;
 	}
-
 }
