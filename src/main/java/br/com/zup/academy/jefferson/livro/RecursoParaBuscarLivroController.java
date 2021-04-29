@@ -34,7 +34,7 @@ public class RecursoParaBuscarLivroController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<DetalhesLivroDTO> findById(@PathVariable Long id){
 		Optional<Livro> livroOptional = livroRepository.findById(id);
-		Livro livro = livroOptional.orElseThrow(() -> new ResourceNotFoundException("Id Not Found" + id));
+		Livro livro = livroOptional.orElseThrow(() -> new ResourceNotFoundException("Id Not Found " + id));
 		return ResponseEntity.ok(new DetalhesLivroDTO(livro));
 	}
 }

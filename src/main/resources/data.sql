@@ -5,3 +5,14 @@ INSERT INTO tb_livro (titulo,resumo,sumario,preco,numero_de_paginas,isbn,data_pu
 
 INSERT INTO tb_livro (titulo,resumo,sumario,preco,numero_de_paginas,isbn,data_publicacao, autor_id, categoria_id) VALUES
 ('Arquitetura Limpa', 'Livro complexo', 'Dificil entendimento', 55.00, 260, 4312452, '2021-11-30', 1, 1);
+
+INSERT INTO tb_pais (nome) VALUES ('Estados Unidos');
+INSERT INTO tb_pais (nome) VALUES ('Argentina');
+INSERT INTO tb_pais (nome) VALUES ('Holanda');
+
+INSERT INTO tb_estado (nome, pais_id) VALUES ('Whasington DC', 1);
+INSERT INTO tb_estado (nome, pais_id) VALUES ('Buenos Aires', 2);
+INSERT INTO tb_estado (nome, pais_id) VALUES ('Amsterdan', 3);
+
+
+
