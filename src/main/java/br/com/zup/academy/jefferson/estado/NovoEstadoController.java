@@ -1,7 +1,5 @@
 package br.com.zup.academy.jefferson.estado;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -28,12 +26,11 @@ public class NovoEstadoController {
 	@PostMapping(value = "/estados")
 	@Transactional
 	public ResponseEntity<EstadoDTO>saveEstado(@Valid @RequestBody EstadoDTO objDto){
-		Optional<Pais> paisOptional = paisRepository.findById(objDto.getPaisId());
-		Pais pais = paisOptional.orElseThrow(() -> new ResourceNotFoundException("ID Not found " + objDto.getPaisId()));
-		Estado estado = objDto.toModel(pais);
+		Pais paises = paisRepository.findById(objDto.getPaisId())
+		.orElseThrow(() -> new ResourceNotFoundException("ID País Not found " + objDto.getPaisId()));
+		Estado estado = objDto.toModel(paises);
 		estadoRepository.save(estado);
 		return ResponseEntity.ok(objDto);
 	}
-
 }
  

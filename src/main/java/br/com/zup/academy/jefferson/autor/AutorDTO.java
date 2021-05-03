@@ -14,7 +14,7 @@ public class AutorDTO {
 	private String nome;
 	@Email(message = "Email invalido")
 	@NotBlank(message = "Campo e-mail é obrigatório")
-	@UniqueValue(domainClass = Autor.class, fieldName = "email")
+	@UniqueValue(domainClass = Autor.class, fieldName = "email", message = "E-mail existente")
 	private String email;
 	@NotBlank(message = "Campo descrição é obrigatório")
 	@Size(max = 400, message = "A descrição máxima é 400 caracteres")

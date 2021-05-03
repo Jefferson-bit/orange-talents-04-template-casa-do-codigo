@@ -1,7 +1,7 @@
 package br.com.zup.academy.jefferson.pais;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.zup.academy.jefferson.cliente.Cliente;
 import br.com.zup.academy.jefferson.estado.Estado;
 
 @Entity
@@ -24,21 +25,32 @@ public class Pais {
 	private String nome;
 
 	@OneToMany(mappedBy = "pais")
-	private Set<Estado> estados = new HashSet<>();
-	
+	private List<Estado> estados = new ArrayList<>();
+
+	@OneToMany(mappedBy = "pais")
+	private List<Cliente> clientes = new ArrayList<>();
+
 	@Deprecated
 	public Pais() {
+	}
+	
+	public Long getId() {
+		return id;
 	}
 	
 	public Pais(String nome) {
 		this.nome = nome;
 	}
 
-	public Set<Estado> getEstados() {
+	public List<Estado> getEstados() {
 		return estados;
 	}
-	
+
 	public String getNome() {
 		return nome;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
 	}
 }

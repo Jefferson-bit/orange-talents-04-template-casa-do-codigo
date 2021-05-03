@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class NovoPaisController {
 	
 	private PaisRepository paisRepository;
-
+	
 	public NovoPaisController(PaisRepository paisRepository) {
 		this.paisRepository = paisRepository;
 	}
-	
+
 	@PostMapping(value = "/paises")
 	@Transactional
 	public ResponseEntity<PaisDTO> savePais(@Valid @RequestBody PaisDTO objDto){

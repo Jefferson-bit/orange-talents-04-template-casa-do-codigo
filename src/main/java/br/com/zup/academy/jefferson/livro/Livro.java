@@ -49,7 +49,7 @@ public class Livro {
 	public Livro() {
 	}
 
-	public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroDePaginas, String isbn,
+	private Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroDePaginas, String isbn,
 			LocalDate dataPublicacao, Categoria categoria, Autor autor) {
 		this.titulo = titulo;
 		this.resumo = resumo;
@@ -127,4 +127,67 @@ public class Livro {
 		return true;
 	}
 
+	public static class LivroBuilder {
+		private String titulo;
+		private String resumo;
+		private String sumario;
+		private BigDecimal preco;
+		private Integer numeroDePaginas;
+		private String isbn;
+		private LocalDate dataPublicacao;
+		private Categoria categoria;
+		private Autor autor;
+
+		public LivroBuilder() {
+		}
+
+		public LivroBuilder titulo(String titulo) {
+			this.titulo = titulo;
+			return this;
+		}
+
+		public LivroBuilder resumo(String resumo) {
+			this.resumo = resumo;
+			return this;
+		}
+
+		public LivroBuilder sumario(String sumario) {
+			this.sumario = sumario;
+			return this;
+		}
+
+		public LivroBuilder preco(BigDecimal preco) {
+			this.preco = preco;
+			return this;
+		}
+
+		public LivroBuilder numeroDePaginas(Integer numeroDePaginas) {
+			this.numeroDePaginas = numeroDePaginas;
+			return this;
+		}
+
+		public LivroBuilder isbn(String isbn) {
+			this.isbn = isbn;
+			return this;
+		}
+
+		public LivroBuilder dataPublicacao(LocalDate dataPublicacao) {
+			this.dataPublicacao = dataPublicacao;
+			return this;
+		}
+
+		public LivroBuilder categoria(Categoria categoria) {
+			this.categoria = categoria;
+			return this;
+		}
+
+		public LivroBuilder autor(Autor autor) {
+			this.autor = autor;
+			return this;
+		}
+
+		public Livro builder() {
+			return new Livro(titulo, resumo, sumario, preco, numeroDePaginas, isbn, dataPublicacao, categoria, autor);
+		}
+	}
 }

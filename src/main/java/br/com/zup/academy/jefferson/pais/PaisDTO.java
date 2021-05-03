@@ -18,6 +18,10 @@ public class PaisDTO {
 		this.nome = nome;
 	}
 	
+	public PaisDTO (Pais pais) {
+		nome = pais.getNome();
+	}
+	
 	public Pais toModel() {
 		return new Pais(this.nome);
 	}

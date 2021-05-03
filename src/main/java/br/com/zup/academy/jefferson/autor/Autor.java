@@ -28,8 +28,7 @@ public class Autor {
 	private String email;
 	@Column(nullable = false)
 	private String descricao;
-
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	@Column(nullable = false)
 	private Instant createdAt;
 
 	@OneToMany(mappedBy = "autor")

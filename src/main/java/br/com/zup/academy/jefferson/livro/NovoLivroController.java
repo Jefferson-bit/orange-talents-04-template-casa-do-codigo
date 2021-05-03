@@ -1,8 +1,6 @@
 package br.com.zup.academy.jefferson.livro;
 
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -12,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zup.academy.jefferson.autor.Autor;
 import br.com.zup.academy.jefferson.autor.AutorRepository;
-import br.com.zup.academy.jefferson.categoria.Categoria;
 import br.com.zup.academy.jefferson.categoria.CategoriaRepository;
 
 @RestController
@@ -35,9 +31,7 @@ public class NovoLivroController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<LivroDTO> saveLivro(@Valid @RequestBody LivroDTO objDto) {
-		Optional<Categoria> categoria = categoiaRepository.findById(objDto.getCategoriaId());
-		Optional<Autor> autor = autorRepository.findById(objDto.getAutorId());
-		Livro livro = objDto.toModel(categoria.get(), autor.get());
+		Livro livro = objDto.toModel(categoiaRepository, autorRepository);
 		livroRepository.save(livro);
 		return ResponseEntity.ok(objDto);
 	}	

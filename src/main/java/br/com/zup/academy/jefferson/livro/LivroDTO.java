@@ -2,6 +2,7 @@ package br.com.zup.academy.jefferson.livro;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
@@ -13,14 +14,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 import br.com.zup.academy.jefferson.autor.Autor;
+import br.com.zup.academy.jefferson.autor.AutorRepository;
 import br.com.zup.academy.jefferson.categoria.Categoria;
+import br.com.zup.academy.jefferson.categoria.CategoriaRepository;
+import br.com.zup.academy.jefferson.exception.ResourceNotFoundException;
 import br.com.zup.academy.jefferson.validator.UniqueValue;
 
 public class LivroDTO {
 	
-	
 	@NotBlank(message = "Titulo é obrigatório")
-	@UniqueValue(domainClass = Livro.class, fieldName = "titulo")
+	@UniqueValue(domainClass = Livro.class, fieldName = "titulo", message = "Título existente")
 	private String titulo;
 	@NotBlank(message = "Resumo é obrigatório")
 	@Size(max = 500, message = "Suporte máximo é de 500 caracter")
@@ -34,7 +37,7 @@ public class LivroDTO {
 	@Min(value = 100, message = "Paginação minima é de 100")
 	private Integer numeroDePaginas;
 	@NotNull(message = "ISBN é obrigatório")
-	@UniqueValue(domainClass = Livro.class, fieldName = "isbn")
+	@UniqueValue(domainClass = Livro.class, fieldName = "isbn", message = "ISBN existente")
 	private String isbn;
 	@NotNull
 	@Future
@@ -47,7 +50,7 @@ public class LivroDTO {
 
 	public LivroDTO() {
 	}
-
+	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	public LivroDTO(@NotBlank(message = "Titulo é obrigatório") String titulo,
 			@NotBlank(message = "Resumo é obrigatório") @Size(max = 500, message = "Suporte máximo é de 500 caracter") String resumo,
 			@NotBlank String sumario,
@@ -64,10 +67,17 @@ public class LivroDTO {
 		this.categoriaId = categoriaId;
 		this.autorId = autorId;
 	}
-	public Livro toModel(Categoria categoria, Autor autor) {
-		return new Livro(titulo, resumo, sumario, preco, numeroDePaginas, isbn, dataPublicacao, categoria, autor);
+	public Livro toModel(CategoriaRepository categoriaRepository, AutorRepository autorRepository) {
+		Categoria categoria = categoriaRepository.findById(categoriaId)
+		.orElseThrow(() -> new ResourceNotFoundException("ID Categoria Not Found"));
+		Autor autor = autorRepository.findById(autorId)
+		.orElseThrow(() -> new ResourceNotFoundException("ID Autor Not Found"));
+		
+		return new Livro.LivroBuilder().titulo(titulo).resumo(resumo).sumario(sumario)
+		.numeroDePaginas(numeroDePaginas).preco(preco).isbn(isbn).dataPublicacao(dataPublicacao)
+		.categoria(categoria).autor(autor).builder();
 	}
-
+				
 	public String getTitulo() {
 		return titulo;
 	}
